@@ -83,9 +83,9 @@ namespace ztd
         using rT = std::remove_reference_t<T>;
 
       public:
-        static constexpr auto C = std::is_const_v<rT>;
-        static constexpr auto V = std::is_volatile_v<rT>;
-        static constexpr Ref R =
+        static constexpr auto const_value = std::is_const_v<rT>;
+        static constexpr auto volatile_value = std::is_volatile_v<rT>;
+        static constexpr Ref reference_value =
             Ref(std::is_reference_v<T> * 2 - std::is_lvalue_reference_v<T>);
     };
 
@@ -141,7 +141,7 @@ namespace ztd
     template <typename Class, typename Ret, typename... Args>
     struct mfp_traits<Ret (Class::*)(Args...)> : func_traits<Ret(Args...)>
     {
-        using class_type = Class;   
+        using class_type = Class;
     };
 
 #define DEFINE_MFP_TRAITS(qs)                                                  \
