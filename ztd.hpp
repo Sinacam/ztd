@@ -94,9 +94,9 @@ namespace ztd
     {
       private:
         using base = cvref<T>;
-
+        using rU = std::remove_cv_t<std::remove_reference_t<U>>;
       public:
-        using type = add_cvref_t<U, base::C, base::V, base::R>;
+        using type = add_cvref_t<rU, base::C, base::V, base::R>;
     };
 
     template <typename T, typename U>
