@@ -29,7 +29,7 @@ Given two types `T1 = cv1 U1 ref1` and `T2 = cv2 U2 ref2`, where cv is the const
 ## func_traits mfp_traits
 
 `func_traits` and `mfp_traits` are traits for functions and member function pointers.
-Given a function or a pointer to member function with a signature `R(Args...) cv ref nx`,
+Given a function or a pointer to member function with the signature `R(Args...) cv ref nx`,
 where cv is the const volatile qualifiers, ref is the reference qualifier and nx is the exception specification, it has the members
 
 * `base_type`: `R(Args...)`
