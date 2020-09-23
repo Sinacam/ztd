@@ -95,6 +95,7 @@ namespace ztd
       private:
         using base = cvref<T>;
         using rU = std::remove_cv_t<std::remove_reference_t<U>>;
+
       public:
         using type = add_cvref_t<rU, base::C, base::V, base::R>;
     };
@@ -169,6 +170,21 @@ namespace ztd
 #undef DEFINE_MFP_TRAITS2
 #undef DEFINE_MFP_TRAITS
 
+    template <typename F, size_t... Is>
+    inline constexpr decltype(auto) index_over(F&& f,
+                                               std::index_sequence<Is...>)
+    {
+        return std::forward<F>(f)(std::integral_constant<size_t, Is>{}...);
+    }
+
+    template <size_t N, typename F>
+    inline constexpr decltype(auto) index_upto(F&& f)
+    {
+        return index_over(std::forward<F>(f), std::make_index_sequence<N>{});
+    }
+
+    template <typename T, size_t>
+    using expand = T;
 } // namespace ztd
 
 #endif
